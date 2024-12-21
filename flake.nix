@@ -16,12 +16,13 @@
     let
       mkSystem = import ./util/mkSystem.nix;
     in
-    mkSystem {
-      inherit inputs;
-      settings = import ./settings.nix;
-      modules = [
-        inputs.catppuccin.homeManagerModules.catppuccin
-        inputs.nixvim.homeManagerModules.nixvim
-      ];
+    {
+      mkMinix = {inputs, settings, modules}: mkSystem {
+	inherit inputs settings; 
+	modules = modules ++ [
+	    inputs.catppuccin.homeManagerModules.catppuccin
+	    inputs.nixvim.homeManagerModules.nixvim
+	];
+      };
     };
 }
