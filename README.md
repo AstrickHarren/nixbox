@@ -56,6 +56,9 @@ Add the following content to `flake.nix`
           # If you want to install nvidia driver, usually required if your 
           # laptop doesn't have a second GPU
           nvidiaDriver.enable = true;
+          # If you are using an outdated nvidia GPU, consider using a legacy 
+          # driver instead. For example, 
+          # nvidiaDriver.version = "legacy_470"
          
           # Install rootLESS! docker, unfortunately, rootFUL doocker is not
           # supported by Minix. Docker data is put in `~/.cache`

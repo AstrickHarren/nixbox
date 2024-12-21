@@ -22,13 +22,18 @@ let
             },
             ...
           }:
-          mkIf nvidiaDriver.enable {
+          let
+            driver = {
+              version = "stable";
+            } // nvidiaDriver;
+          in
+          mkIf driver.enable {
             nixpkgs.config.nvidia.acceptLicense = true;
             hardware.nvidia = {
               open = false;
               modesetting.enable = true;
               nvidiaSettings = true;
-              package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+              package = config.boot.kernelPackages.nvidiaPackages.${driver.version};
             };
             services.xserver.videoDrivers = [ "nvidia" ];
           }
