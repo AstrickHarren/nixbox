@@ -1,6 +1,18 @@
 # Minix
 
-A minimal starting setup for nixvim.
+A minimal starting setup for NixOS.
+
+## Features
+
+- WM with hyprland 
+- Really Blazing Fast neovim by Nixvim
+  - no lazy loading
+  - no plugin manager
+  - ~Ironically those above claims to be the source of efficiency but they turn out to be the reason of slowness from my experience~
+  - benchmarked with a pair of 140Hz detectable human eyes and a pair of hands around 90 WPM. 
+- consistent theme with flavors to choose across OS by Catppuccin. 
+- a lot of git alias (sorry for injecting opininated aliases, I'll fix this if yall don't like them)
+- and more...
 
 > [!WARNING]
 > Still in alpha version, expecting bugs
