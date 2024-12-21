@@ -21,6 +21,8 @@
 	inherit settings; 
 	inputs = minixInputs // inputs;
 	modules = modules ++ [
+	    ./home-manager
+	    settings.home
 	    minixInputs.catppuccin.homeManagerModules.catppuccin
 	    minixInputs.nixvim.homeManagerModules.nixvim
 	];

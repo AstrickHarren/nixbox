@@ -71,13 +71,10 @@ in
   };
 
   homeConfigurations.${settings.userName} = inputs.home-manager.lib.homeManagerConfiguration {
+    inherit modules;
     pkgs = inputs.nixpkgs.legacyPackages.${settings.system};
     extraSpecialArgs = {
       inherit inputs settings;
     };
-    modules = [
-      ../home-manager
-      settings.home
-    ] ++ modules;
   };
 }
