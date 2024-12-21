@@ -91,3 +91,21 @@ put here, refer to [nix home manager options](https://nix-community.github.io/ho
   wayland.windowManager.hyprland.enable = true;
 }
 ```
+
+Now you are good to go! Run the following commands to build your NixOS and
+home manager! 
+
+```sh
+sudo nixos-rebuild switch --flake ~/.config/nix 
+home-manager switch --flake ~/.config/nix
+```
+
+## Update
+
+If there is a change made to Minix, you can update your subscription by running
+```sh
+nix flake update
+```
+in `~/.config/nix`. This will update you to the newest version of Minix and any 
+dependency of Minix. Rebuild your NixOS and/or home manager and you'll see the effect.
+
