@@ -2,7 +2,9 @@
 {
   home.packages = [ pkgs.nixfmt-rfc-style ];
   programs.nixvim.plugins.conform-nvim.settings = {
-    format_on_save = { lsp_format = "fallback"; };
+    format_on_save = {
+      lsp_format = "fallback";
+    };
     formatters_by_ft = {
       nix = [ "nixfmt" ];
     };

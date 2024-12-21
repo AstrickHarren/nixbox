@@ -53,6 +53,14 @@ Add the following content to `flake.nix`
             grub.useOSProber = true;
           };
 
+          # If you want to install nvidia driver, usually required if your 
+          # laptop doesn't have a second GPU
+          nvidiaDriver.enable = true;
+         
+          # Install rootLESS! docker, unfortunately, rootFUL doocker is not
+          # supported by Minix. Docker data is put in `~/.cache`
+          dockerRootless.enable = true;
+
           # Alternatively, you will boot with grub
           # boot.loader.grub.enable = true;
           # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only

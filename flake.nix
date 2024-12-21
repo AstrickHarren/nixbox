@@ -17,15 +17,21 @@
       mkSystem = import ./util/mkSystem.nix;
     in
     {
-      mkMinix = { inputs, settings, modules ? [] }: mkSystem {
-	inherit settings; 
-	inputs = minixInputs // inputs;
-	modules = modules ++ [
-	    ./home-manager
-	    settings.home
-	    minixInputs.catppuccin.homeManagerModules.catppuccin
-	    minixInputs.nixvim.homeManagerModules.nixvim
-	];
-      };
+      mkMinix =
+        {
+          inputs,
+          settings,
+          modules ? [ ],
+        }:
+        mkSystem {
+          inherit settings;
+          inputs = minixInputs // inputs;
+          modules = modules ++ [
+            ./home-manager
+            settings.home
+            minixInputs.catppuccin.homeManagerModules.catppuccin
+            minixInputs.nixvim.homeManagerModules.nixvim
+          ];
+        };
     };
 }
