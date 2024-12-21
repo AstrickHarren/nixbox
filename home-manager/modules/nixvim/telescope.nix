@@ -2,6 +2,7 @@
 with lib;
 {
   programs.ripgrep.enable = true;
+  programs.nixvim.plugins.web-devicons.enable = true;
   programs.nixvim.plugins.telescope = {
     enable = mkDefault true;
     extensions = {
@@ -22,7 +23,7 @@ with lib;
         action = "find_files";
       };
       "<C-S-f>" = {
-        action = "find_files hidden=true";
+        action = "find_files no_ignore=true";
       };
       "<C-g>" = {
         action = "live_grep";
@@ -32,6 +33,15 @@ with lib;
       };
       "<C-r>" = {
         action = "resume";
+      };
+      gr = {
+        action = "lsp_references";
+      };
+      gt = {
+        action = "lsp_type_definitions";
+      };
+      gd = {
+        action = "lsp_definitions";
       };
     };
     settings.defaults = {

@@ -17,7 +17,7 @@
       mkSystem = import ./util/mkSystem.nix;
     in
     {
-      mkMinix = {inputs, settings, modules}: mkSystem {
+      mkMinix = { inputs, settings, modules ? [] }: mkSystem {
 	inherit settings; 
 	inputs = minixInputs // inputs;
 	modules = modules ++ [
