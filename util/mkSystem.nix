@@ -12,40 +12,48 @@ let
     }:
 
     let
-      mkIf = flag: make: if flag then make else [ ];
+      mkIf = flag: make: if flag then make else { };
 
       nvidiaDrm =
-        {
-          nvidiaDriver ? {
-            enable = false;
-          },
-        }:
-        mkIf nvidiaDriver.enable {
-          nixpkgs.config.nvidia.acceptLicense = true;
-          hardware.nvidia = {
-            open = false;
-            modesetting.enable = true;
-            nvidiaSettings = true;
-            package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
-          };
-          services.xserver.videoDrivers = [ "nvidia" ];
-        } settings;
+        (
+          {
+            nvidiaDriver ? {
+              enable = false;
+            },
+            ...
+          }:
+          mkIf nvidiaDriver.enable {
+            nixpkgs.config.nvidia.acceptLicense = true;
+            hardware.nvidia = {
+              open = false;
+              modesetting.enable = true;
+              nvidiaSettings = true;
+              package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+            };
+            services.xserver.videoDrivers = [ "nvidia" ];
+          }
+        )
+          settings;
 
       docker =
-        {
-          dockerRootless ? {
-            enable = false;
-          },
-        }:
-        mkIf dockerRootless.enable {
-          virtualisation.docker.rootless = {
-            enable = true;
-            setSocketVariable = true;
-            daemon.settings = {
-              data-root = "/home/${settings.userName}/.cache/docker";
+        (
+          {
+            dockerRootless ? {
+              enable = false;
+            },
+            ...
+          }:
+          mkIf dockerRootless.enable {
+            virtualisation.docker.rootless = {
+              enable = true;
+              setSocketVariable = true;
+              daemon.settings = {
+                data-root = "/home/${settings.userName}/.cache/docker";
+              };
             };
-          };
-        } settings;
+          }
+        )
+          settings;
     in
     nvidiaDrm
     // docker
@@ -79,14 +87,6 @@ let
       services.pipewire = {
         enable = true;
         pulse.enable = true;
-      };
-
-      virtualisation.docker.rootless = {
-        enable = true;
-        setSocketVariable = true;
-        daemon.settings = {
-          data-root = "/home/${settings.userName}/.cache/docker";
-        };
       };
 
       users.users.${settings.userName} = {
