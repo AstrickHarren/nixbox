@@ -33,6 +33,8 @@ in
       rounding = 10;
     };
 
+    gestures.workspace_swipe = true;
+
     binds = {
       allow_workspace_cycles = true;
     };

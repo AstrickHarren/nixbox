@@ -1,13 +1,10 @@
 { lib, config, ... }:
 {
-  options = {
-    programs.nixvim.diagnostic.manual_sign_filter = lib.mkEnableOption "manually filter all signs per line by their most serverities";
-  };
   config = {
     programs.nixvim = {
       # only show the highest severity in sign
       # workaround for rust analzyer cancel
-      extraConfigLua = lib.mkIf config.programs.nixvim.diagnostic.manual_sign_filter ''
+      extraConfigLua = ''
         local ns = vim.api.nvim_create_namespace "my_namespace"
         local orig_signs_handler = vim.diagnostic.handlers.signs
 

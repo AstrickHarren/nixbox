@@ -1,7 +1,4 @@
-{ lib, ... }:
-
-with lib;
-
+{ ... }:
 {
   imports = [
     ./autoclose.nix
@@ -90,12 +87,12 @@ with lib;
       globals.mapleader = " ";
       globals.omni_sql_no_default_maps = 1;
 
-      plugins.yazi.enable = mkDefault true;
-      plugins.lsp.enable = mkDefault true;
-      plugins.conform-nvim.enable = mkDefault true;
-      plugins.autoclose.enable = mkDefault true;
-      plugins.gitsigns.enable = mkDefault true;
-      plugins.git-conflict.enable = mkDefault true;
+      plugins.yazi.enable = true;
+      plugins.lsp.enable = true;
+      plugins.conform-nvim.enable = true;
+      plugins.autoclose.enable = true;
+      plugins.gitsigns.enable = true;
+      plugins.git-conflict.enable = true;
     };
   };
 }

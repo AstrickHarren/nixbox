@@ -1,19 +1,18 @@
 { lib, ... }:
-with lib;
 {
   programs.ripgrep.enable = true;
   programs.nixvim.plugins.web-devicons.enable = true;
   programs.nixvim.plugins.telescope = {
-    enable = mkDefault true;
+    enable = true;
     extensions = {
       ui-select = {
-        enable = mkDefault true;
+        enable = true;
         settings.__raw = ''
           {
             require("telescope.themes").get_cursor { }
           }'';
       };
-      fzf-native.enable = mkDefault true;
+      fzf-native.enable = true;
     };
     keymaps = {
       "<C-p>" = {
