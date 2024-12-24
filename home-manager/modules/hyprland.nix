@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }:
 
@@ -19,12 +20,29 @@ let
 in
 {
 
-  home.packages = with pkgs; [ playerctl ];
+  home.packages = with pkgs; [
+    playerctl
+    killall
+  ];
   services.playerctld.enable = true;
 
   wayland.windowManager.hyprland = {
     package = pkgs.hyprland;
     # xwayland.enable = true;
+  };
+
+  xdg.configFile = {
+    "bin/toggle_fuzzel" = {
+      text = ''
+        #!/bin/sh
+        if pgrep -x fuzzel; then
+            killall fuzzel
+        else
+            fuzzel
+        fi
+      '';
+      executable = true;
+    };
   };
 
   wayland.windowManager.hyprland.settings = {
@@ -42,7 +60,7 @@ in
       # IMPORTANT: use `wev` to determine the keycode names
       "$mod, Slash, exec, firefox"
       "$mod, Return, exec, kitty"
-      "$mod, Space, exec, fuzzel"
+      "$mod, Space, exec, ${config.xdg.configHome}/bin/toggle_fuzzel"
       "$mod, M, exec, spotify --enable-features=UseOzonePlatform --ozone-platform=wayland"
       "$mod, Q, killactive"
 

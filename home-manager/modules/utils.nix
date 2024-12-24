@@ -22,6 +22,7 @@
     enable = true;
     settings = {
       key-bindings = {
+        use-bold = true;
         cancel = "Control+c Escape";
         delete-prev-word = "Control+w";
       };

@@ -23,6 +23,7 @@ in
   imports = lib.map mkDefaultModule [
     ./fish.nix
     ./git.nix
+    ./librewolf
     ./hyprland.nix
     ./kitty.nix
     ./nixvim
