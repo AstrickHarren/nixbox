@@ -26,16 +26,6 @@ in
     ./hyprland.nix
     ./kitty.nix
     ./nixvim
+    ./utils.nix
   ];
-
-  config = {
-    home.packages = with pkgs; [
-      curl
-      wget
-      httpie
-      wl-clipboard
-      libqalculate
-    ];
-    programs.bat.enable = true;
-  };
 }

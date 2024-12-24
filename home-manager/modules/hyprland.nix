@@ -42,6 +42,7 @@ in
       # IMPORTANT: use `wev` to determine the keycode names
       "$mod, Slash, exec, firefox"
       "$mod, Return, exec, kitty"
+      "$mod, Space, exec, fuzzel"
       "$mod, M, exec, spotify --enable-features=UseOzonePlatform --ozone-platform=wayland"
       "$mod, Q, killactive"
 

@@ -7,7 +7,7 @@ in
 {
   options = {
     programs.kitty.modifyFont.underlinePosition = mkOption { default = 4; };
-    programs.kitty.modifyFont.strikeThroughPosition = mkOption { default = 6; };
+    programs.kitty.modifyFont.strikeThroughPosition = mkOption { default = 2; };
     programs.kitty.modifyFont.cellHeight = mkOption { default = 1.5; };
   };
   config = {
