@@ -4,6 +4,7 @@
 }:
 {
   home.packages = with pkgs; [
+    duf
     curl
     wget
     wl-clipboard
