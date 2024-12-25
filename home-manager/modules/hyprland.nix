@@ -42,9 +42,16 @@ in
 
   home.pointerCursor = {
     gtk.enable = true;
+    x11.enable = true;
     package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Ice";
+    name = "Bibata-Modern-Classic";
     size = 24;
+  };
+
+  home.sessionVariables = {
+    QT_QPA_PLATFORM = "wayland";
+    SDL_VIDEODRIVER = "wayland";
+    XDG_SESSION_TYPE = "wayland";
   };
 
   wayland.windowManager.hyprland = {
@@ -57,13 +64,6 @@ in
     decoration = {
       rounding = 10;
     };
-
-    env = [
-      "HYPRCURSOR_THEME,Bibata-Modern-Ice"
-      "HYPRCURSOR_SIZE,24"
-      "XCURSOR_THEME,Bibata-Modern-Ice"
-      "XCURSOR_SIZE,24"
-    ];
 
     gestures.workspace_swipe = true;
 
