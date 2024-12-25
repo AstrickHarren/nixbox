@@ -42,7 +42,6 @@ in
 
   home.pointerCursor = {
     gtk.enable = true;
-    x11.enable = true;
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Classic";
     size = 24;
@@ -56,7 +55,6 @@ in
 
   wayland.windowManager.hyprland = {
     package = pkgs.hyprland;
-    xwayland.enable = true;
   };
 
   wayland.windowManager.hyprland.settings = {
