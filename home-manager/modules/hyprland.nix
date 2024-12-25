@@ -58,7 +58,7 @@ in
     };
     bind = [
       # IMPORTANT: use `wev` to determine the keycode names
-      "$mod, Slash, exec, firefox"
+      "$mod, Slash, exec, librewolf"
       "$mod, Return, exec, kitty"
       "$mod, Space, exec, ${config.xdg.configHome}/bin/toggle_fuzzel"
       "$mod, M, exec, spotify --enable-features=UseOzonePlatform --ozone-platform=wayland"

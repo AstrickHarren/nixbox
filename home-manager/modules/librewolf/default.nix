@@ -13,7 +13,6 @@
     programs.librewolf = {
       profiles.default = {
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          onepassword-password-manager
           sidebery
         ];
         settings = {
