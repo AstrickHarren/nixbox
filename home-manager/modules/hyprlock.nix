@@ -53,7 +53,7 @@
 
         # Time
         {
-          text = ''cmd[update:1000] echo "<span>$(date +"%H:%M")</span>"'';
+          text = "$TIME";
           color = "rgba(216, 222, 233, 0.70)";
           font_size = 130;
           font_family = "SF Pro Display Bold";
