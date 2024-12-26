@@ -96,6 +96,21 @@ let
         pulse.enable = true;
       };
 
+      services.greetd = {
+        enable = true;
+        vt = 3;
+        settings = {
+          initial_session = {
+            user = settings.userName;
+            command = "Hyprland";
+          };
+          default_session = {
+            user = settings.userName;
+            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --time-format '%I:%M %p | %a * %h | %F' --cmd Hyprland";
+          };
+        };
+      };
+
       users.users.${settings.userName} = {
         isNormalUser = true;
         extraGroups = [
