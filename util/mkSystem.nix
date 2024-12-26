@@ -73,11 +73,13 @@ let
       boot = settings.boot;
 
       fonts.packages = with pkgs; [
-        fira-code-nerdfont
         noto-fonts
         noto-fonts-cjk-sans
         noto-fonts-emoji
-        fantasque-sans-mono
+        nerd-fonts.fira-code
+        nerd-fonts.fantasque-sans-mono
+        nerd-fonts.sauce-code-pro
+        inputs.apple-fonts.packages.${settings.system}.sf-pro
       ];
 
       networking.hostName = settings.hostName;
