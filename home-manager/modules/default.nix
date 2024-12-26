@@ -25,6 +25,7 @@ in
     ./git.nix
     ./librewolf
     ./hyprland.nix
+    ./hyprlock.nix
     ./kitty.nix
     ./nixvim
     ./utils.nix
