@@ -21,6 +21,9 @@
   programs.fuzzel = {
     enable = true;
     settings = {
+      main = {
+        font = "SF Pro Display";
+      };
       key-bindings = {
         use-bold = true;
         cancel = "Control+c Escape";
