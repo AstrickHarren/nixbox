@@ -103,6 +103,9 @@ let
         ];
       };
 
+      # Enable gtk4 apps
+      programs.dconf.enable = true;
+
       environment.systemPackages = with pkgs; [
         home-manager
       ];
