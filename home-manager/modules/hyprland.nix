@@ -73,6 +73,7 @@ in
       "$mod, Space, exec, ${config.xdg.configHome}/bin/toggle_fuzzel"
       "$mod, M, exec, spotify --enable-features=UseOzonePlatform --ozone-platform=wayland"
       "$mod, Q, killactive"
+      "$mod CTRL, Q, exec, hyprlock"
 
       "$mod, H, movefocus, l"
       "$mod, J, movefocus, d"

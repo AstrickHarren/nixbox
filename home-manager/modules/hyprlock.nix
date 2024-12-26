@@ -4,9 +4,6 @@
     settings = {
       general = {
         hide_cursor = true;
-        no_fade_in = true;
-        no_fade_out = true;
-        grace = 0;
         disable_loading_bar = true;
       };
 
@@ -74,7 +71,6 @@
           outer_color = "rgba(255, 255, 255, 0)";
           inner_color = "rgba(255, 255, 255, 0.1)";
           font_color = "rgb(200, 200, 200)";
-          fade_on_empty = false;
           roundings = -1;
           check_color = "rgb(204, 136, 34)";
           hide_input = false;
