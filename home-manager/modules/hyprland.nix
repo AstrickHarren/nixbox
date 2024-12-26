@@ -56,6 +56,11 @@ in
       rounding = 10;
     };
 
+    cursor = {
+      # This fixes firefox not changing cursor (See #1)
+      no_hardware_cursors = true;
+    };
+
     gestures.workspace_swipe = true;
 
     binds = {
