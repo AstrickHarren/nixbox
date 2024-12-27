@@ -117,6 +117,21 @@
             silent = true;
           };
         }
+        # Remapping <C-c> to <Esc> for consistency
+        # ... and also sometimes LSP signs not showing up for <C-c>
+        # https://www.reddit.com/r/neovim/comments/v309ol/nvim_lsp_does_not_update_when_exiting_insert_mode/
+        {
+          action = "<Esc>";
+          key = "<C-c>";
+          mode = [
+            "i"
+            "n"
+            "v"
+          ];
+          options = {
+            silent = true;
+          };
+        }
       ];
     };
   };
