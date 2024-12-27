@@ -21,6 +21,7 @@ let
 in
 {
   imports = lib.map mkDefaultModule [
+    ./cursor.nix
     ./fish.nix
     ./git.nix
     ./librewolf
