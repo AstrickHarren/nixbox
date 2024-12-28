@@ -23,6 +23,9 @@
             draw.treesitter = [ "lsp" ];
           };
         };
+        fuzzy = {
+          prebuilt_binaries.force_version = "0";
+        };
         signature = {
           enabled = true;
         };
