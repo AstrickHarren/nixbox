@@ -13,20 +13,15 @@
   config = {
     gtk = {
       enable = true;
-      # cursorTheme = {
-      #   package = pkgs.bibata-cursors;
-      #   name = "Bibata-Modern-Classic";
-      # };
-      #
       # theme = {
       #   package = pkgs.flat-remix-gtk;
       #   name = "Flat-Remix-GTK-Grey-Darkest";
       # };
       #
-      # iconTheme = {
-      #   package = pkgs.adwaita-icon-theme;
-      #   name = "Adwaita";
-      # };
+      iconTheme = {
+        package = pkgs.adwaita-icon-theme;
+        name = "Adwaita";
+      };
       #
       # font = {
       #   name = "Sans";
