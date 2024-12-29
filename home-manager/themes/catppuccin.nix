@@ -1,10 +1,11 @@
+{ config, lib, ... }:
 {
   catppuccin.enable = true;
-  catppuccin.flavor = "mocha";
+  catppuccin.flavor = lib.mkDefault "mocha";
   programs.nixvim = {
     colorschemes.catppuccin = {
       enable = true;
-      settings.flavor = "mocha";
+      settings.flavor = config.catppuccin.flavor;
     };
   };
 }
