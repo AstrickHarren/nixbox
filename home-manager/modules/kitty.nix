@@ -12,6 +12,13 @@ in
   };
   config = {
     programs.kitty = {
+      font = {
+        name = "JetBrainsMono Nerd Font";
+        size = 16;
+      };
+
+      shellIntegration.enableFishIntegration = true;
+
       settings = {
         enable_audio_bell = false;
 
@@ -28,6 +35,7 @@ in
 
         window_padding_width = 20;
       };
+
       extraConfig = ''
         map ctrl+shift+t new_tab_with_cwd
         map ctrl+shift+w no_op

@@ -79,6 +79,7 @@ let
         nerd-fonts.fira-code
         nerd-fonts.fantasque-sans-mono
         nerd-fonts.sauce-code-pro
+        nerd-fonts.jetbrains-mono
         inputs.apple-fonts.packages.${settings.system}.sf-pro
       ];
 
