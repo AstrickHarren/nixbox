@@ -1,0 +1,16 @@
+@mixin hover($bg) {
+    background-color: $bg;
+
+    &:hover {
+      background-color: lighten($bg, 5%);
+    }
+}
+
+@mixin window {
+    background-color: $surface;
+    border-radius: 1rem;
+    padding: 1rem;
+    color: $onSurface;
+    box-shadow: 0 0 4px 2px $shadow;
+    margin: 1.5rem;
+}

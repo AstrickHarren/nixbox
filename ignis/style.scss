@@ -1,0 +1,135 @@
+* {
+    all: unset;
+    font-size: 1.4rem;
+    font-weight: bold;
+    font-family: SF Pro Display,
+}
+
+image {
+    -gtk-icon-transform: scale(1.2);
+}
+
+@import "./scss/palette.scss";
+@import "./scss/utils.scss";
+@import "./scss/control_center.scss";
+
+.bar {
+    padding: 0.6rem 2rem;
+    background-color: $bg;
+    color: $onBg;
+}
+
+
+.workspaces {
+    border-radius: 1rem;
+    padding: 0.5rem;
+    background-color: $surface;
+    margin: 0 0.5rem;
+    margin-left: 0;
+}
+
+.workspace {
+    @include hover($onSecondary);
+    border-radius: 1rem;
+    margin: 0 0.25rem;
+    min-width: 0.7rem;
+    min-height: 0.7rem;
+    transition: 0.3s;
+
+    &.inactive {
+      @include hover($onSurfaceVariant);
+    }
+
+    &.active {
+        @include hover($onSurface);
+        min-width: 2rem;
+    }
+}
+
+.clock {
+    @include hover($surface);
+    color: $onSurface;
+    background-color: $surface;
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    padding: 0 0.75rem;
+    margin: 0 0.5rem;
+    margin-right: 0;
+    transition: 0.3s;
+
+    &.active {
+        background-color: $primary;
+        color: $surface;
+
+        .record-indicator {
+            color: $surface;
+        }
+
+        @include hover($primary)
+    }
+}
+
+.tray-item {
+    all: unset;
+}
+
+.clock {
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
+}
+
+// popover.menu {
+//     contents {
+//         background-color: $bg;
+//         padding: 0.35rem;
+//         border-radius: 1rem;
+//         modelbutton {
+//             transition: 0.3s;
+//             border-radius: 0.5rem;
+//             padding: 0.25rem 1rem;
+//         }
+//         modelbutton:hover {
+//             background-color: mix($bg, $unactive, 80%);
+//         }
+//         separator {
+//             background-color: mix($bg, $unactive, 90%);
+//             min-height: 0.1rem;
+//             margin: 0.5rem 0;
+//         }
+//
+//         label:disabled {
+//             color: $unactive;
+//         }
+//
+//         arrow {
+//             opacity: 0.3;
+//
+//             &:hover { background: none; }
+//
+//             &.left { -gtk-icon-source: -gtk-icontheme("go-previous-symbolic"); }
+//
+//             &.right { -gtk-icon-source: -gtk-icontheme("go-next-symbolic"); }
+//           }
+//
+//     }
+// }
+
+
+// .volume-slider trough {
+//     min-width: 100px;
+//     background-color: gray;
+//     min-height: 0.3rem;
+//     border-radius: 1rem;
+//
+//     highlight {
+//         background-color: $active;
+//     }
+//
+//     slider {
+//         background-color: $fg;
+//         min-height: 20px;
+//         min-width: 20px;
+//         margin: -8px;
+//         border-radius: 1rem;
+//     }
+// }

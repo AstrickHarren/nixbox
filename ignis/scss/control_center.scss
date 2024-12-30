@@ -1,0 +1,74 @@
+.control-center {
+    @include window;
+    background-color: $bg;
+    min-width: 28rem;
+    padding: 1rem;
+}
+
+.control-center-menu {
+    margin-top: 1rem;
+    background-color: $surface;
+    border-radius: 1rem;
+    padding: 1rem;
+
+    separator {
+        margin: 0.5rem 0;
+    }
+}
+
+.qs-button {
+    @include hover($surface);
+    color: $onSurface;
+    min-height: 2.4rem;
+    border-radius: 1.2rem;
+    transition: 0.3s;
+    padding: 0.3rem 0.8rem;
+
+    &.active {
+        @include hover($primary);
+        color: $surface;
+    }
+}
+
+.qs-button-label {
+    margin-left: 0.5rem;
+}
+
+.toggle-box {
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    background-color: $primaryContainer;
+}
+
+.ethernet-header-box,
+.wifi-header-box,
+.vpn-header-box {
+    margin-bottom: 0.5rem;
+}
+
+.ethernet-header-label,
+.vpn-header-label {
+    font-size: 1.35rem;
+    margin-left: 0.75rem;
+}
+
+.wifi-header-label {
+    font-size: 1.35rem;
+}
+
+.ethernet-connection-item,
+.wifi-network-item,
+.vpn-connection-item {
+    @include hover($surface);
+    transition: 0.3s;
+    border-radius: 1rem;
+    padding: 0.5rem 0.5rem;
+}
+
+
+.ethernet-connection-label,
+.wifi-network-label,
+.vpn-connection-label {
+    margin-left: 0.5rem;
+}
+
