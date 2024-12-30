@@ -5,7 +5,8 @@
   programs.nixvim = {
     colorschemes.catppuccin = {
       enable = true;
-      settings.flavor = config.catppuccin.flavor;
+      settings.flavour = config.catppuccin.flavor;
+      autoLoad = true;
     };
   };
 }
