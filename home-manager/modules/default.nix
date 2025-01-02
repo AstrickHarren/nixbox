@@ -27,7 +27,7 @@ let
   mkCondModule =
     enableAll: mod:
     let
-      cond = if lib.isAttrs mod then mod.enable else enableAll;
+      cond = if lib.isAttrs mod then (lib.or mod.enable enableAll) else enableAll;
       module = mkDefaultModule (if lib.isAttrs mod then mod.module else mod);
     in
     {
@@ -39,6 +39,7 @@ in
 {
   options = {
     minix.enable = lib.mkEnableOption "Enabel minix integrations by default";
+    minix.nixvim.enable = lib.mkEnableOption "Enabel minix's Neovim Config";
   };
 
   imports = lib.map (mkCondModule config.minix.enable) [
@@ -49,7 +50,10 @@ in
     ./hyprland.nix
     ./hyprlock.nix
     ./kitty.nix
-    ./nixvim
+    {
+      enable = config.minix.nixvim.enable;
+      module = ./nixvim;
+    }
     ./utils.nix
   ];
 }
