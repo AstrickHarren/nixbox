@@ -40,10 +40,16 @@
             minixInputs.catppuccin.homeManagerModules.catppuccin
             minixInputs.nixvim.homeManagerModules.nixvim
             {
+              nixpkgs.config.allowUnfree = true;
               nixpkgs.overlays = [
                 minixInputs.nur.overlays.default
               ];
-              nixpkgs.config.allowUnfree = true;
+            }
+          ];
+          nixosModules = [
+            ./os/default.nix
+            {
+              minix = settings.minix;
             }
           ];
         };
