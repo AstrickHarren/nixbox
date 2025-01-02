@@ -83,4 +83,10 @@
       ];
     };
   };
+
+  wayland.windowManager.hyprland.settings = {
+    exec-once = [
+      "hyprlock || loginctl terminate-session $XDG_SESSION_ID"
+    ];
+  };
 }

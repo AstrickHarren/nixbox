@@ -19,7 +19,6 @@ let
   );
 in
 {
-
   home.packages = with pkgs; [
     playerctl
     killall
