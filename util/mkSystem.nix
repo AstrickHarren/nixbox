@@ -28,14 +28,6 @@ let
             } // nvidiaDriver;
           in
           mkIf driver.enable {
-            nixpkgs.config.nvidia.acceptLicense = true;
-            hardware.nvidia = {
-              open = false;
-              modesetting.enable = true;
-              nvidiaSettings = true;
-              package = config.boot.kernelPackages.nvidiaPackages.${driver.version};
-            };
-            services.xserver.videoDrivers = [ "nvidia" ];
           }
         )
           settings;
@@ -111,6 +103,15 @@ let
           };
         };
       };
+
+      nixpkgs.config.nvidia.acceptLicense = true;
+      hardware.nvidia = {
+        open = false;
+        modesetting.enable = true;
+        nvidiaSettings = true;
+        # package = config.boot.kernelPackages.nvidiaPackages.${driver.version};
+      };
+      services.xserver.videoDrivers = [ "nvidia" ];
 
       users.users.${settings.userName} = {
         isNormalUser = true;
