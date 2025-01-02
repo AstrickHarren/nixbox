@@ -61,10 +61,6 @@ in
       no_hardware_cursors = true;
     };
 
-    exec-once = [
-      "hyprlock || loginctl terminate-session $XDG_SESSION_ID"
-    ];
-
     gestures.workspace_swipe = true;
 
     binds = {
