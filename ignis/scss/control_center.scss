@@ -72,3 +72,55 @@
     margin-left: 0.5rem;
 }
 
+.volume-entry {
+    @include hover($surface);
+    transition: 0.3s;
+    border-radius: 1rem;
+    padding: 0.5rem 0.5rem;
+}
+  
+.volume-entry-list-header-label {
+    font-size: 1.35rem;
+    margin-left: 0.5rem;
+}
+    
+.volume-entry-list-header-box {
+    margin-bottom: 0.75rem;
+}
+
+.material-slider {
+    all: unset;
+
+    * {
+        all: unset;
+    }
+}
+
+.material-slider trough,
+.material-slider trough highlight {
+    background-color: $surface;
+    border-radius: 1rem;
+    min-height: 1rem;
+}
+
+
+.material-slider trough highlight {
+    background-color: $primary;
+}
+
+.material-slider-icon {
+    padding: 0.25rem;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    border-radius: 1rem;
+    margin-right: 0.5rem;
+}
+
+.material-slider-arrow {
+    all: unset;
+    padding: 0.25rem;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    border-radius: 1rem;
+    margin-left: 0.5rem;
+}

@@ -3,6 +3,7 @@
 from ignis.app import IgnisApp
 from ignis.widgets import Widget
 from modules.control_center.quick_settings import quick_settings
+from modules.control_center.volume import VolumeSlider
 
 app = IgnisApp.get_default()
 
@@ -14,8 +15,13 @@ def control_center_widget() -> Widget.Box:
         child=[
             Widget.Box(
                 vertical=True,
+                spacing=20,
                 css_classes=["control-center-widget"],
-                child=[quick_settings()],
+                child=[
+                    VolumeSlider("speaker"),
+                    VolumeSlider("microphone"),
+                    quick_settings(),
+                ],
             ),
         ],
     )

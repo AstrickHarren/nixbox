@@ -1,6 +1,8 @@
 from ignis.services.network import NetworkService
 from ignis.widgets import Widget
+from modules.control_center.bluetooth import bluetooth_control
 
+from .ethernet import ethernet_control
 from .qs_button import QSButton
 from .wifi import wifi_control
 
@@ -35,7 +37,7 @@ def qs_fabric(main_box: Widget.Box, *buttons: QSButton) -> None:
 
 
 def qs_config(main_box: Widget.Box) -> None:
-    qs_fabric(main_box, *wifi_control())
+    qs_fabric(main_box, *wifi_control(), *ethernet_control(), bluetooth_control())
 
 
 def update_box(main_box: Widget.Box):

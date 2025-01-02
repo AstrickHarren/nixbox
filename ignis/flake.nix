@@ -36,8 +36,10 @@
           mkShell {
             buildInputs = [
               ignis
+              pkgs.wrapGAppsHook3
               pkgs.glib
               pkgs.gtk4
+              pkgs.gobject-introspection
               pkgs.gtk4-layer-shell
               pkgs.libpulseaudio
               pkgs.python312Packages.pygobject3
@@ -57,6 +59,17 @@
             ];
             PYTHONPATH = "${ignis}/lib/python3.12/site-packages";
             LD_LIBRARY_PATH = "${pkgs.gtk4-layer-shell}/lib";
+            GI_TYPELIB_PATH = "$out/lib:${
+              pkgs.lib.concatStringsSep ":" (
+                map (pkg: "${pkg}/lib/girepository-1.0") [
+                  pkgs.glib
+                  pkgs.gobject-introspection
+                  pkgs.networkmanager
+                  pkgs.gnome-bluetooth
+                  pkgs.gst_all_1.gstreamer
+                ]
+              )
+            }:$GI_TYPELIB_PATH";
             shellHook = ''
               exec fish
             '';
