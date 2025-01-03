@@ -39,7 +39,8 @@ in
 {
   options = {
     minix.enable = lib.mkEnableOption "Enabel minix integrations by default";
-    minix.nixvim.enable = lib.mkEnableOption "Enabel minix's Neovim Config";
+    minix.nixvim.enable = lib.mkEnableOption "Enable minix's Neovim Config";
+    minix.hyprlock.enable = lib.mkEnableOption "Enable hyprlock";
   };
 
   imports = lib.map (mkCondModule config.minix.enable) [
@@ -48,7 +49,10 @@ in
     ./git.nix
     ./librewolf
     ./hyprland.nix
-    ./hyprlock.nix
+    {
+      enable = config.minix.hyprlock.enable;
+      module = ./hyprlock.nix;
+    }
     ./kitty.nix
     {
       enable = config.minix.nixvim.enable;
