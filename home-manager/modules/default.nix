@@ -30,11 +30,15 @@ let
       cond = if lib.isAttrs mod then (lib.or mod.enable enableAll) else enableAll;
       module = mkDefaultModule (if lib.isAttrs mod then mod.module else mod);
     in
-    module;
+    {
+      imports = module.imports;
+      options = module.options;
+      config = lib.mkIf cond module.config;
+    };
 in
 {
   options = {
-    minix.enable = lib.mkEnableOption "Enabel minix integrations by default";
+    minix.enable = lib.mkEnableOption "Enable minix integrations by default";
     minix.nixvim.enable = lib.mkEnableOption "Enable minix's Neovim Config";
     minix.hyprlock.enable = lib.mkEnableOption "Enable hyprlock";
     minix.lang.rust.enable = lib.mkEnableOption "Enable rust";
