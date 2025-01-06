@@ -27,7 +27,7 @@ let
   mkCondModule =
     enableAll: mod:
     let
-      cond = if lib.isAttrs mod then (lib.or mod.enable enableAll) else enableAll;
+      cond = if lib.isAttrs mod then mod.enable else enableAll;
       module = mkDefaultModule (if lib.isAttrs mod then mod.module else mod);
     in
     {
@@ -42,6 +42,12 @@ in
     minix.nixvim.enable = lib.mkEnableOption "Enable minix's Neovim Config";
     minix.hyprlock.enable = lib.mkEnableOption "Enable hyprlock";
     minix.lang.rust.enable = lib.mkEnableOption "Enable rust";
+  };
+
+  config.minix = {
+    nixvim.enable = lib.mkDefault config.minix.enable;
+    hyprlock.enable = lib.mkDefault config.minix.enable;
+    lang.rust.enable = lib.mkDefault config.minix.enable;
   };
 
   imports = lib.map (mkCondModule config.minix.enable) [
@@ -64,5 +70,6 @@ in
       enable = config.minix.lang.rust.enable;
       module = ./lang/rust.nix;
     }
+    ./ignis.nix
   ];
 }

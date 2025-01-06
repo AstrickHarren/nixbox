@@ -23,6 +23,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ignis-config = {
+      url = "github:astrickharren/ignis-config";
+      flake = false;
+    };
   };
 
   outputs =
