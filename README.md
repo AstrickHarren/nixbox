@@ -1,4 +1,4 @@
-# Minix
+# NixBox
 
 A minimal starting setup for NixOS.
 
@@ -20,79 +20,25 @@ A minimal starting setup for NixOS.
 
 ## Install
 
-Create a folder in the place `~/.config/nix` with the following structure
-```
-~/.config/nix
-├── flake.nix
-├── hardware.nix
-└── home.nix
+Clone the repo, create a config directory for nix and copy the content of the example to it
+```sh
+git clone git@github.com:AstrickHarren/nixbox.git
+mkdir -p ~/.config/nix
+cp nixbox/example/* ~/.config/nix
 ```
 
-Copy your hardware configuration from `/etc/nixos/hardware-configuration.nix`
-```bash
+Copy the your NixOS hardware configuration to the config directory as well, it can be done usually by
+```sh
 cp /etc/nixos/hardware-configuration.nix hardware.nix
 ```
 
-Add the following content to `flake.nix`
-
 > [!IMPORTANT]
-> Make sure to change the `settings` field in the file for your purpose
+> Make sure you read the example thoroughly and change config accordingly before the next step!
+> There are plently of places you might want to change, most obviously the userName and hostName
 
-```nix
-# flake.nix
+## Build
 
-{
-  inputs = {
-    minix.url = "github:AstrickHarren/minix";
-  };
-
-  outputs = inputs: inputs.minix.mkMinix {
-      inherit inputs;
-      settings = 
-        {
-          userName = "YOUR_USERNAME"; # change this
-          hostName = "YOUR_HOSTNAME"; # and this
-          hardware = ./hardware.nix;
-          home = ./home.nix;
-
-          # Select your boot method. 
-          # You will typically use uefi (MS secure boot) for dual boot
-          boot.loader = {
-            systemd-boot.enable = true;
-            efi.canTouchEfiVariables = true;
-            # This is selected by you when you installed NixOS
-            efi.efiSysMountPoint = "/boot";
-            grub.useOSProber = true;
-          };
-
-          # Alternatively, you will boot with grub
-          # boot.loader.grub.enable = true;
-          # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
-
-          # If you want to install nvidia driver, usually required if your 
-          # laptop doesn't have a second GPU
-          nvidiaDriver.enable = true;
-          # If you are using an outdated nvidia GPU, consider using a legacy 
-          # driver instead. For example, 
-          # nvidiaDriver.version = "legacy_470"
-         
-          # Install rootLESS! docker, unfortunately, rootFUL doocker is not
-          # supported by Minix. Docker data is put in `~/.cache`
-          dockerRootless.enable = true;
-
-          system = "x86_64-linux";
-          stateVersion = "24.11";
-        }
-    };
-}
-```
-
-Add the `home.nix` file from `example/` and please **read it thoroughly**, it's couple of lines long
-This is where nix home manager come into play. To find all the options you can 
-put here, refer to [nix home manager options](https://nix-community.github.io/home-manager/options.xhtml).
-
-Now you are good to go! Run the following commands to build your NixOS and
-home manager! 
+Now you are good to go! Run the following commands to build your NixOS and home manager!
 
 ```sh
 sudo nixos-rebuild switch --flake ~/.config/nix 
@@ -101,10 +47,9 @@ home-manager switch --flake ~/.config/nix
 
 ## Update
 
-If there is a change made to Minix, you can update your subscription by running
+If there is a change made to NixBox, you can update your subscription by running
 ```sh
-nix flake update
+nix flake update nixbox
 ```
-in `~/.config/nix`. This will update you to the newest version of Minix and any 
-dependency of Minix. Rebuild your NixOS and/or home manager and you'll see the effect.
-
+under `~/.config/nix`. This will update you to the newest version of NixBox and any 
+dependency of NixBox. Rebuild your NixOS and/or home manager and you'll see the effect.
