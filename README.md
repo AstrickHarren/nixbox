@@ -87,33 +87,9 @@ Add the following content to `flake.nix`
 }
 ```
 
-Add the following to your `home.nix` file and you can change it to your liking. 
+Add the `home.nix` file from `example/` and please **read it thoroughly**, it's couple of lines long
 This is where nix home manager come into play. To find all the options you can 
 put here, refer to [nix home manager options](https://nix-community.github.io/home-manager/options.xhtml).
-
-```nix
-{ settings, ... }:
-{
-  programs = {
-    git = {
-      enable = true;
-      # this is your laptop username, change it if you like
-      userName = settings.userName; 
-      userEmail = "YOUR_EMAIL";
-    };
-    fish.enable = true;
-    kitty.enable = true;
-    nixvim.enable = true;
-  };
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    FLAKE = "$HOME/.config/nix";
-  };
-
-  wayland.windowManager.hyprland.enable = true;
-}
-```
 
 Now you are good to go! Run the following commands to build your NixOS and
 home manager! 

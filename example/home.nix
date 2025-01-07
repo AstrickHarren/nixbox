@@ -1,11 +1,10 @@
 {
   settings,
-  inputs,
   pkgs,
-  lib,
   ...
 }:
 {
+
   programs = {
     git = {
       enable = true;
@@ -15,8 +14,11 @@
     fish.enable = true;
     kitty.enable = true;
     nixvim.enable = true;
+    librewolf.enable = true; # browser
+    spotify-player.enable = true;
   };
 
+  # Example to add a new language (python) support (formatter and lsp)
   programs.nixvim.plugins.lsp.servers.pyright.enable = true;
   programs.nixvim.plugins.conform-nvim.settings.formatters_by_ft = {
     python = [
@@ -24,62 +26,33 @@
       "black"
     ];
   };
-
-  catppuccin.flavor = "frappe";
-
   home.packages = [
-    inputs.zen-browser.packages.${settings.system}.default
-    inputs.ignis.packages.${settings.system}.ignis
     (pkgs.python3.withPackages (
       py: with py; [
         isort
         black
-        jinja2
-        pillow
       ]
     ))
   ];
 
-  xdg.mimeApps =
-    let
-      defaultZen =
-        list:
-        lib.listToAttrs (
-          lib.map (item: {
-            name = item;
-            value = "userapp-Zen Browser-0YQGZ2.desktop";
-          }) list
-        );
-      mimes = defaultZen [
-        "x-scheme-handler/http"
-        "x-scheme-handler/https"
-        "x-scheme-handler/chrome"
-        "application/x-extension-htm"
-        "application/x-extension-html"
-        "application/x-extension-shtml"
-        "application/xhtml+xml"
-        "application/x-extension-xhtml"
-        "application/x-extension-xht"
-      ];
-    in
-    {
-      enable = true;
-      associations.added = mimes;
-      defaultApplications = mimes;
-    };
+  # One of "latte", "frappe", "macchiato", "mocha"
+  catppuccin.flavor = "frappe";
 
   home.sessionVariables = {
     EDITOR = "nvim";
-    FLAKE = "$HOME/.config/nix";
+    FLAKE = "$HOME/.config/nix"; # where you put your nix config
   };
 
-  minix.cursor.theme = "Bibata-Modern-Amber";
+  minix.enable = true;
+  minix.cursor.theme = "Bibata-Modern-Amber"; # default is `Bibata-Modern-Ice`
+  minix.lang.rust = {
+    enable = true;
+    mold.enable = true; # enable mold linker (might not work with things like dioxus)
+    nextest.enable = true; # install cargo nextest
+    target = {
+      musl.enable = true; # enable x86_64-unknown-linux-musl
+    };
+  };
 
   wayland.windowManager.hyprland.enable = true;
-  wayland.windowManager.hyprland.settings = {
-    monitor = [
-      "eDP-2, 2560x1440@165, 0x0, 1"
-      # "HDMI-A-1, 3840x2160, 2560x0, 1"
-    ];
-  };
 }
