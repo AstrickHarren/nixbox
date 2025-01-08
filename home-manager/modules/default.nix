@@ -7,12 +7,17 @@
 let
   mkModuleIf = (import ../../util/mkModule.nix input).mkModuleIf;
 
-  enableOptions = {
-    nixvim.enable = lib.mkEnableOption "nixvim";
-    hyprlock.enable = lib.mkEnableOption "hyprlock";
-    lang.rust.enable = lib.mkEnableOption "rust";
-    ignis.enable = lib.mkEnableOption "ignis";
-  };
+  enableOptions =
+    lib.mapAttrsRecursive
+      (k: v: {
+        enable = lib.mkEnableOption (if v == null then (lib.elemAt k (lib.length k - 1)) else v);
+      })
+      {
+        nixvim = null;
+        hyprlock = null;
+        lang.rust = null;
+        ignis = null;
+      };
 
   enableDefaults = lib.mapAttrsRecursiveCond (as: !(as ? "_type")) (
     k: _: lib.mkDefault config.nixbox.enable
@@ -25,13 +30,13 @@ in
   config.nixbox = enableDefaults;
 
   imports = [
-    ./cursor.nix
-    ./fish.nix
-    ./git.nix
-    ./librewolf
-    ./hyprland.nix
-    ./hyprlock.nix
-    ./kitty.nix
+    (mkModuleIf config.nixbox.cursor.enable ./cursor.nix)
+    (mkModuleIf config.nixbox.fish.enable ./fish.nix)
+    (mkModuleIf config.nixbox.git.enable ./git.nix)
+    (mkModuleIf config.nixbox.librewolf.enable ./librewolf)
+    (mkModuleIf config.nixbox.hyprland.enable ./hyprland.nix)
+    (mkModuleIf config.nixbox.hyprlock.enable ./hyprlock.nix)
+    (mkModuleIf config.nixbox.kitty.enable ./kitty.nix)
     (mkModuleIf config.nixbox.nixvim.enable ./nixvim)
     (mkModuleIf config.nixbox.enable ./utils.nix)
     (mkModuleIf config.nixbox.lang.rust.enable ./lang/rust.nix)
