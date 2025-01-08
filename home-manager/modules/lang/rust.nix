@@ -8,7 +8,7 @@
 let
   filterMap = l: builtins.map (x: x.name) (builtins.filter (x: x.enable) l);
 
-  rust = config.minix.lang.rust;
+  rust = config.nixbox.lang.rust;
   rust-bin = pkgs.rust-bin.selectLatestNightlyWith (
     toolchain:
     toolchain.default.override ({
@@ -37,12 +37,12 @@ let
 in
 {
   options = {
-    minix.lang.rust.mold.enable = lib.mkEnableOption "mold linker";
-    minix.lang.rust.nextest.enable = lib.mkEnableOption "mold linker";
+    nixbox.lang.rust.mold.enable = lib.mkEnableOption "mold linker";
+    nixbox.lang.rust.nextest.enable = lib.mkEnableOption "mold linker";
 
-    minix.lang.rust.extensions.rust-src.enable = lib.mkEnableOption "rust src";
-    minix.lang.rust.target.risc.enable = lib.mkEnableOption "risc target";
-    minix.lang.rust.target.musl.enable = lib.mkEnableOption "musl target";
+    nixbox.lang.rust.extensions.rust-src.enable = lib.mkEnableOption "rust src";
+    nixbox.lang.rust.target.risc.enable = lib.mkEnableOption "risc target";
+    nixbox.lang.rust.target.musl.enable = lib.mkEnableOption "musl target";
   };
   config = {
     nixpkgs.overlays = [

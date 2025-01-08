@@ -9,14 +9,14 @@
 {
   imports = [ settings.hardware ];
 
-  options.minix = {
+  options.nixbox = {
     nvidia.enable = lib.mkEnableOption "Enable Nvidia Driver";
     dockerRootless.enable = lib.mkEnableOption "Enable rootless Docker";
   };
 
   config =
     let
-      docker = lib.mkIf config.minix.dockerRootless.enable {
+      docker = lib.mkIf config.nixbox.dockerRootless.enable {
         virtualisation.docker.rootless = {
           enable = true;
           setSocketVariable = true;
@@ -25,9 +25,9 @@
           };
         };
       };
-      nvidia = lib.mkIf config.minix.nvidia.enable {
+      nvidia = lib.mkIf config.nixbox.nvidia.enable {
         nixpkgs.config.nvidia.acceptLicense = true;
-        hardware.nvidia = lib.mkIf config.minix.nvidia.enable {
+        hardware.nvidia = lib.mkIf config.nixbox.nvidia.enable {
           open = false;
           modesetting.enable = true;
           nvidiaSettings = true;

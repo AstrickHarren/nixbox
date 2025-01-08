@@ -8,20 +8,21 @@ let
   mkModuleIf = (import ../../util/mkModule.nix input).mkModuleIf;
 
   enableOptions = {
-    nixvim.enable = lib.mkEnableOption "minix";
+    nixvim.enable = lib.mkEnableOption "nixvim";
     hyprlock.enable = lib.mkEnableOption "hyprlock";
     lang.rust.enable = lib.mkEnableOption "rust";
+    ignis.enable = lib.mkEnableOption "ignis";
   };
 
   enableDefaults = lib.mapAttrsRecursiveCond (as: !(as ? "_type")) (
-    k: _: lib.mkDefault config.minix.enable
+    k: _: lib.mkDefault config.nixbox.enable
   ) enableOptions;
 in
 {
-  options.minix = {
-    enable = lib.mkEnableOption "Enable minix integrations by default";
+  options.nixbox = {
+    enable = lib.mkEnableOption "nixbox integrations by default";
   } // enableOptions;
-  config.minix = enableDefaults;
+  config.nixbox = enableDefaults;
 
   imports = [
     ./cursor.nix
@@ -31,9 +32,9 @@ in
     ./hyprland.nix
     ./hyprlock.nix
     ./kitty.nix
-    (mkModuleIf config.minix.nixvim.enable ./nixvim)
-    (mkModuleIf config.minix.enable ./utils.nix)
-    (mkModuleIf config.minix.lang.rust.enable ./lang/rust.nix)
-    ./ignis.nix
+    (mkModuleIf config.nixbox.nixvim.enable ./nixvim)
+    (mkModuleIf config.nixbox.enable ./utils.nix)
+    (mkModuleIf config.nixbox.lang.rust.enable ./lang/rust.nix)
+    (mkModuleIf config.nixbox.ignis.enable ./ignis.nix)
   ];
 }
