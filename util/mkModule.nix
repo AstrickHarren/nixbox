@@ -90,23 +90,14 @@ let
     }
   ];
 
-  mkDefaultModule = chain [
-    normalizeMod
-    (mod: {
-      imports = lib.map mkDefaultModule mod.imports;
-      options = mod.options;
-      config = lib.mapAttrsRecursive (_: mkDefault) mod.config;
-    })
-  ];
-
   mkModuleIf =
     cond:
     chain [
-      mkDefaultModule
+      normalizeMod
       (mod: {
         imports = lib.map (mkModuleIf cond) mod.imports;
         options = mod.options;
-        config = lib.mkIf cond mod.config;
+        config = lib.mkIf cond (lib.mapAttrsRecursive (_: mkDefault) mod.config);
       })
     ];
 in

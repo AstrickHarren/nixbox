@@ -31,7 +31,7 @@ in
     ./hyprland.nix
     ./hyprlock.nix
     ./kitty.nix
-    ./nixvim
+    (mkModuleIf config.minix.nixvim.enable ./nixvim)
     (mkModuleIf config.minix.enable ./utils.nix)
     (mkModuleIf config.minix.lang.rust.enable ./lang/rust.nix)
     ./ignis.nix
