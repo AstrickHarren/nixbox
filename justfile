@@ -4,7 +4,7 @@ update:
   nix flake update $NIXBOX --flake $FLAKE
 
 git-update:
-  git cadn && git psfl
+  git cadn
 
 home-manager-switch:
   home-manager switch --flake $FLAKE 

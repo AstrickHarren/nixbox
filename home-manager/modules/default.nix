@@ -1,22 +1,27 @@
 {
   lib,
-  nixboxLib,
   config,
+  pkgs,
   ...
 }@input:
-{
-  options = {
-    minix.enable = lib.mkEnableOption "Enable minix integrations by default";
-    minix.nixvim.enable = lib.mkEnableOption "Enable minix's Neovim Config";
-    minix.hyprlock.enable = lib.mkEnableOption "Enable hyprlock";
-    minix.lang.rust.enable = lib.mkEnableOption "Enable rust";
+let
+  mkModuleIf = (import ../../util/mkModule.nix input).mkModuleIf;
+
+  enableOptions = {
+    nixvim.enable = lib.mkEnableOption "minix";
+    hyprlock.enable = lib.mkEnableOption "hyprlock";
+    lang.rust.enable = lib.mkEnableOption "rust";
   };
 
-  config.minix = {
-    nixvim.enable = lib.mkDefault config.minix.enable;
-    hyprlock.enable = lib.mkDefault config.minix.enable;
-    lang.rust.enable = lib.mkDefault config.minix.enable;
-  };
+  enableDefaults = lib.mapAttrsRecursiveCond (as: !(as ? "_type")) (
+    k: _: lib.mkDefault config.minix.enable
+  ) enableOptions;
+in
+{
+  options.minix = {
+    enable = lib.mkEnableOption "Enable minix integrations by default";
+  } // enableOptions;
+  config.minix = enableDefaults;
 
   imports = [
     ./cursor.nix
@@ -24,11 +29,11 @@
     ./git.nix
     ./librewolf
     ./hyprland.nix
-    (nixboxLib.mkModuleIf config.minix.hyprlock.enable ./hyprlock.nix)
+    ./hyprlock.nix
     ./kitty.nix
-    (nixboxLib.mkModuleIf config.minix.nixvim.enable ./nixvim.nix)
-    ./utils.nix
-    (nixboxLib.mkModuleIf config.minix.lang.rust.enable ./lang/rust.nix)
+    ./nixvim
+    (mkModuleIf config.minix.enable ./utils.nix)
+    (mkModuleIf config.minix.lang.rust.enable ./lang/rust.nix)
     ./ignis.nix
   ];
 }
