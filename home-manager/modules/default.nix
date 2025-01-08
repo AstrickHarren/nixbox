@@ -7,39 +7,42 @@
 let
   mkModuleIf = (import ../../util/mkModule.nix input).mkModuleIf;
 
-  enableOptions =
-    lib.mapAttrsRecursive
-      (k: v: {
-        enable = lib.mkEnableOption (if v == null then (lib.elemAt k (lib.length k - 1)) else v);
-      })
-      {
-        nixvim = null;
-        hyprlock = null;
-        lang.rust = null;
-        ignis = null;
-      };
+  subModules = {
+    cursor = ./cursor.nix;
+    fish = ./fish.nix;
+    git = ./git.nix;
+    librewolf = ./librewolf;
+    hyprland = ./hyprland.nix;
+    hyprlock = ./hyprlock.nix;
+    kitty = ./kitty.nix;
+    nixvim = ./nixvim;
+    lang.rust = ./lang/rust.nix;
+    ignis = ./ignis.nix;
+  };
 
-  enableDefaults = lib.mapAttrsRecursiveCond (as: !(as ? "_type")) (
-    k: _: lib.mkDefault config.nixbox.enable
-  ) enableOptions;
+  enableOptions =
+    (lib.mapAttrsRecursive (k: v: {
+      enable = lib.mkEnableOption (lib.elemAt k (lib.length k - 1));
+    }) subModules)
+    // {
+      enable = lib.mkEnableOption "nixbox integrations by default";
+    };
+  enableDefaults = lib.mapAttrsRecursive (k: _: {
+    enable = lib.mkDefault config.nixbox.enable;
+  }) subModules;
+
+  mkImport =
+    p: ms:
+    lib.flatten (
+      lib.mapAttrsToList (
+        k: v: if lib.isAttrs v then mkImport p.${k} v else [ (mkModuleIf p.${k}.enable v) ]
+      ) ms
+    );
 in
 {
-  options.nixbox = {
-    enable = lib.mkEnableOption "nixbox integrations by default";
-  } // enableOptions;
+  options.nixbox = enableOptions;
   config.nixbox = enableDefaults;
-
-  imports = [
-    (mkModuleIf config.nixbox.cursor.enable ./cursor.nix)
-    (mkModuleIf config.nixbox.fish.enable ./fish.nix)
-    (mkModuleIf config.nixbox.git.enable ./git.nix)
-    (mkModuleIf config.nixbox.librewolf.enable ./librewolf)
-    (mkModuleIf config.nixbox.hyprland.enable ./hyprland.nix)
-    (mkModuleIf config.nixbox.hyprlock.enable ./hyprlock.nix)
-    (mkModuleIf config.nixbox.kitty.enable ./kitty.nix)
-    (mkModuleIf config.nixbox.nixvim.enable ./nixvim)
+  imports = mkImport config.nixbox subModules ++ [
     (mkModuleIf config.nixbox.enable ./utils.nix)
-    (mkModuleIf config.nixbox.lang.rust.enable ./lang/rust.nix)
-    (mkModuleIf config.nixbox.ignis.enable ./ignis.nix)
   ];
 }
