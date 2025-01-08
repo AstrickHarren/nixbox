@@ -1,9 +1,17 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nur.url = "github:nix-community/NUR";
 
-    catppuccin.url = "github:catppuccin/nix";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,36 +44,36 @@
   };
 
   outputs =
-    minixInputs:
+    nixboxInputs:
     let
       mkSystem = import ./util/mkSystem.nix;
     in
     {
-      mkMinix =
+      mkNixbox =
         {
           inputs,
           settings,
-          modules ? [ ],
         }:
         mkSystem {
           inherit settings;
-          inputs = minixInputs // inputs;
-          modules = modules ++ [
+          inputs = nixboxInputs // inputs;
+          homeModules = [
             ./home-manager
             settings.home
-            minixInputs.catppuccin.homeManagerModules.catppuccin
-            minixInputs.nixvim.homeManagerModules.nixvim
+            nixboxInputs.catppuccin.homeManagerModules.catppuccin
+            nixboxInputs.nixvim.homeManagerModules.nixvim
             {
               nixpkgs.config.allowUnfree = true;
               nixpkgs.overlays = [
-                minixInputs.nur.overlays.default
+                nixboxInputs.nur.overlays.default
               ];
             }
           ];
           nixosModules = [
             ./os/default.nix
+            settings.os or { }
             {
-              minix = settings.minix;
+              nixbox = settings.nixbox;
             }
           ];
         };

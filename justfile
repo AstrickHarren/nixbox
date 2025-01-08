@@ -1,14 +1,18 @@
+export NIXBOX := "nixbox"
+
 update: 
-  nix flake update --flake $FLAKE
+  nix flake update $NIXBOX --flake $FLAKE
 
-ghms:
-  git cadn && git psfl && sudo nix flake update --flake $FLAKE && home-manager switch --flake $FLAKE
+git-update:
+  git cadn && git psfl
 
-hms:
-  nix flake update --flake $FLAKE && home-manager switch --flake $FLAKE
+home-manager-switch:
+  home-manager switch --flake $FLAKE 
 
-gnixs:
-  git cadn && git psfl && nix flake update --flake $FLAKE && sudo nixos-rebuild switch --flake $FLAKE
+nixos-switch:
+  sudo nixos-rebuild switch --flake $FLAKE
 
-nixs:
-  sudo nix flake update --flake $FLAKE && sudo nixos-rebuild switch --flake $FLAKE
+hms: update home-manager-switch
+nixs: update nixos-switch
+ghms: git-update update home-manager-switch
+gnixs: git-update update nixos-switch

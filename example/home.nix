@@ -43,9 +43,9 @@
     FLAKE = "$HOME/.config/nix"; # where you put your nix config
   };
 
-  minix.enable = true;
-  minix.cursor.theme = "Bibata-Modern-Amber"; # default is `Bibata-Modern-Ice`
-  minix.lang.rust = {
+  nixbox.enable = true;
+  nixbox.cursor.theme = "Bibata-Modern-Amber"; # default is `Bibata-Modern-Ice`
+  nixbox.lang.rust = {
     enable = true;
     mold.enable = true; # enable mold linker (might not work with things like dioxus)
     nextest.enable = true; # install cargo nextest
