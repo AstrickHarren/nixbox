@@ -68,11 +68,7 @@ let
   mkDefault = condChain [
     {
       cond = lib.isType "override";
-      fn = m: {
-        _type = "override";
-        priority = m.priority;
-        content = mkDefault m.content;
-      };
+      fn = m: m;
       return = true;
     }
     {
@@ -97,7 +93,11 @@ let
       (mod: {
         imports = lib.map (mkModuleIf cond) mod.imports;
         options = mod.options;
-        config = lib.mkIf cond (lib.mapAttrsRecursive (_: mkDefault) mod.config);
+        config = lib.mkIf cond (
+          lib.mapAttrsRecursiveCond (m: !(lib.isType "override" m || lib.isType "if" m)) (
+            _: mkDefault
+          ) mod.config
+        );
       })
     ];
 in
