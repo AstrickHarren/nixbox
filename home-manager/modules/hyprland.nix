@@ -93,11 +93,11 @@ in
             concat (
               filter (
                 intoList (
-                  {
+                  layouts
+                  // {
                     us.enable = true;
                     us.usedForBindings = true;
                   }
-                  // layouts
                 )
               )
             ); # Enable `us` by default

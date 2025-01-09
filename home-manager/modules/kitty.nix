@@ -40,6 +40,7 @@ in
         map ctrl+shift+t new_tab_with_cwd
         map ctrl+shift+w no_op
         map ctrl+shift+f send_key ctrl+shift+f
+        map ctrl+c copy_and_clear_or_interrupt
 
         modify_font underline_position ${toString cfg.modifyFont.underlinePosition}
         modify_font strikethrough_position ${toString cfg.modifyFont.strikeThroughPosition}
