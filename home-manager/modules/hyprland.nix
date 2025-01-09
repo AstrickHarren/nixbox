@@ -21,7 +21,19 @@ let
 in
 {
   options.nixbox = {
-    keys.capsToEsc = lib.mkEnableOption "mapping capslock to escape";
+    keyboards.capsAsEsc = lib.mkEnableOption "mapping capslock to escape";
+    keyboards.layouts = lib.mkOption {
+      type = lib.types.attrs;
+      default = { };
+      example = {
+        us = {
+          enable = true;
+          layouts = "qwerty";
+          usedForBindings = true;
+        };
+        il.enable = true;
+      };
+    };
   };
 
   config = {
@@ -61,9 +73,42 @@ in
         rounding = 10;
       };
 
-      input = {
-        kb_options = lib.mkIf config.nixbox.keys.capsToEsc "caps:escape";
-      };
+      input =
+        let
+          layouts = config.nixbox.keyboards.layouts;
+          capsAsEsc = config.nixbox.keyboards.capsAsEsc;
+
+          kb_layout =
+            let
+              intoList = lib.mapAttrsToList (
+                k: v: {
+                  name = k;
+                  enable = v.enable;
+                  usedForBindings = v.usedForBindings or false;
+                }
+              );
+              filter = lib.filter (x: x.enable);
+              concat = lib.fold (x: acc: if x.usedForBindings then x.name + acc else acc + "," + x.name) "";
+            in
+            concat (
+              filter (
+                intoList (
+                  {
+                    us.enable = true;
+                    us.usedForBindings = true;
+                  }
+                  // layouts
+                )
+              )
+            ); # Enable `us` by default
+        in
+        {
+          inherit kb_layout;
+          kb_options = lib.mkMerge [
+            (lib.mkIf capsAsEsc "caps:escape, grp:alt_shift_toggle")
+            (lib.mkIf (!capsAsEsc) "grp:alt_shift_toggle")
+          ];
+        };
 
       cursor = {
         # This fixes firefox not changing cursor (See #1)

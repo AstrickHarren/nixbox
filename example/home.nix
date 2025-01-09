@@ -43,14 +43,25 @@
     FLAKE = "$HOME/.config/nix"; # where you put your nix config
   };
 
-  nixbox.enable = true;
-  nixbox.cursor.theme = "Bibata-Modern-Amber"; # default is `Bibata-Modern-Ice`
-  nixbox.lang.rust = {
+  nixbox = {
     enable = true;
-    mold.enable = true; # enable mold linker (might not work with things like dioxus)
-    nextest.enable = true; # install cargo nextest
-    target = {
-      musl.enable = true; # enable x86_64-unknown-linux-musl
+    cursor.theme = "Bibata-Modern-Amber"; # default is `Bibata-Modern-Ice`
+
+    keyboards.capsAsEsc = true; # map capslock to esc
+    keyboards.layouts = {
+      # `us` (English, US) is enabled by default
+      # Otherwise if you might lose the ability to write English letters,
+      # then you are stuck, since you need English letters to change the config back
+      il.enable = true; # enables Hebrew
+    };
+
+    lang.rust = {
+      enable = true;
+      mold.enable = true; # enable mold linker (might not work with things like dioxus)
+      nextest.enable = true; # install cargo nextest
+      target = {
+        musl.enable = true; # enable x86_64-unknown-linux-musl
+      };
     };
   };
 

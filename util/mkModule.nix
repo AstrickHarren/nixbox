@@ -81,6 +81,14 @@ let
       return = true;
     }
     {
+      cond = lib.isType "merge";
+      fn = m: {
+        _type = "merge";
+        content = lib.map mkDefault m.content;
+      };
+      return = true;
+    }
+    {
       cond = isNotMergable;
       fn = lib.mkDefault;
     }
