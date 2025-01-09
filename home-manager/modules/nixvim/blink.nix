@@ -30,28 +30,17 @@
           };
         };
         fuzzy = {
-          prebuilt_binaries.force_version = "0";
+          # prebuilt_binaries.force_version = "0";
         };
         signature = {
           enabled = true;
         };
-        snippets = {
-          expand.__raw = "function(snippet) require('luasnip').lsp_expand(snippet) end";
-          active.__raw = ''
-            function(filter)
-                  if filter and filter.direction then
-            	return require('luasnip').jumpable(filter.direction)
-                  end
-                  return require('luasnip').in_snippet()
-                end
-          '';
-          jump.__raw = "function(direction) require('luasnip').jump(direction) end";
-        };
+	snippets.preset = "luasnip";
         sources = {
           default = [
             "lsp"
             "path"
-            "luasnip"
+            "snippets"
             "buffer"
           ];
         };
