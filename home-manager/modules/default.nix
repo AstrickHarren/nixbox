@@ -18,6 +18,7 @@ let
     nixvim = ./nixvim;
     lang.rust = ./lang/rust.nix;
     ignis = ./ignis.nix;
+    clipse = ./clipse.nix;
   };
 
   enableOptions =
