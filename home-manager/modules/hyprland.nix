@@ -63,6 +63,26 @@ in
       XDG_SESSION_TYPE = "wayland";
     };
 
+    # Enable screensharing
+    xdg.portal = {
+      enable = true;
+      extraPortals = [
+        # using wlr for now as xdg-desktop-portal-hyprland doesn't work well
+        pkgs.xdg-desktop-portal-wlr
+        pkgs.xdg-desktop-portal-gtk
+      ];
+      configPackages = [ pkgs.hyprland ];
+    };
+
+    ## Using wlr for now (see comment above)
+    # home.file."${config.xdg.configHome}/hypr/xdph.conf" = {
+    #   text = ''
+    #     screencopy {
+    #       allow_token_by_default = true
+    #     }
+    #   '';
+    # };
+
     wayland.windowManager.hyprland = {
       package = pkgs.hyprland;
     };

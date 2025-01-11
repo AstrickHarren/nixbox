@@ -7,6 +7,6 @@
       "float,class:(clipse)"
       "size 1200 1200,class:(clipse)"
     ];
-    bind = [ "SUPER, V, exec,  kitty --class clipse -e 'clipse'" ];
+    bind = [ "$mod, V, exec,  kitty --class clipse -e 'clipse'" ];
   };
 }
