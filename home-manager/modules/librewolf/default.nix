@@ -14,6 +14,7 @@
       profiles.default = {
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           sidebery
+          clearurls
         ];
         settings = {
           "browser.startup.homepage" = config.programs.librewolf.homepage;
