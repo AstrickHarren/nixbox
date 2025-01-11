@@ -19,6 +19,7 @@ let
     lang.rust = ./lang/rust.nix;
     ignis = ./ignis.nix;
     clipse = ./clipse.nix;
+    betterfox = ./betterfox.nix;
   };
 
   enableOptions =
