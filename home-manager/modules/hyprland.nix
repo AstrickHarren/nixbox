@@ -128,6 +128,7 @@ in
             (lib.mkIf capsAsEsc "caps:escape, grp:alt_shift_toggle")
             (lib.mkIf (!capsAsEsc) "grp:alt_shift_toggle")
           ];
+          touchpad.natural_scroll = true;
         };
 
       cursor = {
