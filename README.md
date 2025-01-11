@@ -1,21 +1,19 @@
 # NixBox
 
-A minimal starting setup for NixOS.
+Blazing fast, minimal, working WM environment for NixOS.
+
+> [!WARNING]
+> Still in alpha, expecting bugs
 
 ## Features
 
-- WM with hyprland 
-- Really Blazing Fast neovim by Nixvim
-  - no lazy loading
-  - no plugin manager
-  - ~Ironically those above claims to be the source of efficiency but they turn out to be the reason of slowness from my experience~
-  - benchmarked with a pair of 140Hz detectable human eyes and a pair of hands around 90 WPM. 
-- consistent theme with flavors to choose across OS by Catppuccin. 
-- a lot of git alias (sorry for injecting opininated aliases, I'll fix this if yall don't like them)
-- and more...
-
-> [!WARNING]
-> Still in alpha version, expecting bugs
+- Out of box working environment with NixOS.
+- User directory manager by [Home manager](https://nix-community.github.io/home-manager/options.xhtml)
+- Wayland window manager by [Hyprland](https://wiki.hyprland.org/)
+- Status bar and widgets by [Ignis](https://linkfrg.github.io/ignis/stable/index.html)
+- Neovim setup by [Nixvim](https://nix-community.github.io/nixvim/)
+- Theme with 4 flavors by [Catppuccin](https://catppuccin.com/)
+- All of them are modular and can be enabled/disabled, or partially overriden in your config file. 
 
 
 ## Install
