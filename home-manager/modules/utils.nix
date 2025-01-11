@@ -1,5 +1,4 @@
 {
-  lib,
   pkgs,
   ...
 }:
@@ -8,16 +7,24 @@
     duf
     curl
     wget
+    jq
+
     wl-clipboard
 
     glow
     httpie
     just
-    jq
     libqalculate
   ];
 
+  home.shellAliases = {
+    df = "duf";
+    cat = "bat";
+    find = "fd";
+  };
+
   programs.bat.enable = true;
+  programs.fd.enable = true;
   programs.btop.enable = true;
   programs.fuzzel = {
     enable = true;
