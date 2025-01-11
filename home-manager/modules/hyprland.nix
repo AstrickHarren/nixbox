@@ -136,7 +136,10 @@ in
         no_hardware_cursors = true;
       };
 
-      gestures.workspace_swipe = true;
+      gestures = {
+        workspace_swipe = true;
+        workspace_swipe_min_fingers = true;
+      };
 
       binds = {
         allow_workspace_cycles = true;
