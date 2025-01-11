@@ -41,6 +41,7 @@ in
         map ctrl+shift+w no_op
         map ctrl+shift+f send_key ctrl+shift+f
         map ctrl+c copy_and_clear_or_interrupt
+        map ctrl+v paste_from_clipboard
 
         modify_font underline_position ${toString cfg.modifyFont.underlinePosition}
         modify_font strikethrough_position ${toString cfg.modifyFont.strikeThroughPosition}
