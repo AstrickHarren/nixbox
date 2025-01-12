@@ -14,6 +14,7 @@ let
     librewolf = ./librewolf;
     hyprland = ./hyprland.nix;
     hyprlock = ./hyprlock.nix;
+    hyprpaper = ./hyprpaper.nix;
     kitty = ./kitty.nix;
     nixvim = ./nixvim;
     lang.rust = ./lang/rust.nix;
