@@ -33,7 +33,7 @@
     };
 
     ignis = {
-      url = "github:linkfrg/ignis";
+      url = "github:AstrickHarren/ignis";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
