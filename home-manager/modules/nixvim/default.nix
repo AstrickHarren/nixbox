@@ -2,7 +2,7 @@
 {
   imports = [
     ./autoclose.nix
-    ./blink.nix
+    ./cmp.nix
     ./conform.nix
     ./gitsigns.nix
     ./git-conflict.nix
