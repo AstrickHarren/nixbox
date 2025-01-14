@@ -4,28 +4,37 @@
 }:
 {
   home.packages = with pkgs; [
-    duf
     curl
+
+    # modern unix
+    duf
     wget
     jq
+    httpie
+    just
+    dust
+    procs
+    dogdns
 
     wl-clipboard
 
     glow
-    httpie
-    just
     libqalculate
   ];
 
   home.shellAliases = {
+    du = "dust";
     df = "duf";
+    dig = "dog";
     cat = "bat";
     find = "fd";
+    grep = "rg";
   };
 
   programs.bat.enable = true;
   programs.fd.enable = true;
   programs.btop.enable = true;
+  programs.ripgrep.enable = true;
   programs.fuzzel = {
     enable = true;
     settings = {
