@@ -13,5 +13,9 @@ in
         key = cfg.keymap.open;
       }
     ];
+
+    plugins.yazi.settings.keymaps = {
+      open_file_in_vertical_split = "<c-cr>";
+    };
   };
 }

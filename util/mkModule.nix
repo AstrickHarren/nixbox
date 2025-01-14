@@ -72,20 +72,16 @@ let
       return = true;
     }
     {
-      cond = lib.isType "if";
-      fn = m: {
-        _type = "if";
-        condition = m.condition;
-        content = mkDefault m.content;
-      };
-      return = true;
-    }
-    {
       cond = lib.isType "merge";
       fn = m: {
         _type = "merge";
         content = lib.map mkDefault m.content;
       };
+      return = true;
+    }
+    {
+      cond = m: m ? _type && m ? content;
+      fn = m: m // { content = mkDefault m.content; };
       return = true;
     }
     {
@@ -102,9 +98,7 @@ let
         imports = lib.map (mkModuleIf cond) mod.imports;
         options = mod.options;
         config = lib.mkIf cond (
-          lib.mapAttrsRecursiveCond (m: !(lib.isType "override" m || lib.isType "if" m)) (
-            _: mkDefault
-          ) mod.config
+          lib.mapAttrsRecursiveCond (m: !(m ? _type && m ? content)) (_: mkDefault) mod.config
         );
       })
     ];

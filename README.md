@@ -5,6 +5,10 @@ Blazing fast, minimal, working WM environment for NixOS.
 > [!WARNING]
 > Still in alpha, expecting bugs
 
+## Screenshot
+
+![img](./assets/2025-01-12-211914_hyprshot.png)
+
 ## Features
 
 - Out of box working environment with NixOS.

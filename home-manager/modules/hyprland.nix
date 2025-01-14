@@ -128,6 +128,7 @@ in
             (lib.mkIf capsAsEsc "caps:escape, grp:alt_shift_toggle")
             (lib.mkIf (!capsAsEsc) "grp:alt_shift_toggle")
           ];
+          touchpad.natural_scroll = true;
         };
 
       cursor = {
@@ -135,7 +136,10 @@ in
         no_hardware_cursors = true;
       };
 
-      gestures.workspace_swipe = true;
+      gestures = {
+        workspace_swipe = true;
+        workspace_swipe_min_fingers = true;
+      };
 
       binds = {
         allow_workspace_cycles = true;
