@@ -83,7 +83,6 @@
           };
         };
 
-        services.tlp.enable = true;
         services.upower.enable = true;
 
         users.users.${settings.userName} = {
