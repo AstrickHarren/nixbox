@@ -331,15 +331,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1736808453,
-        "narHash": "sha256-+0/ww/ohW7XGR4t3WwsJUcVPSM9LEVkNvsSmWBxgh5M=",
-        "owner": "AstrickHarren",
+        "lastModified": 1736885127,
+        "narHash": "sha256-QxOAT1zeLY/b3SYMaq0Hu2n/1e21IzxSfomb//QdEpU=",
+        "owner": "linkfrg",
         "repo": "ignis",
-        "rev": "07ca602a1c7af45154f3dda41592f93d8b7ca916",
+        "rev": "38f45d2df9643896d6702cba9a934c8759d2254f",
         "type": "github"
       },
       "original": {
-        "owner": "AstrickHarren",
+        "owner": "linkfrg",
         "repo": "ignis",
         "type": "github"
       }
