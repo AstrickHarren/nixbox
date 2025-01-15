@@ -347,11 +347,11 @@
     "ignis-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1736829201,
-        "narHash": "sha256-Po0CqBvYoiCQB52dKOyA2MQcWQdyt0JQWFE18qBRgZY=",
+        "lastModified": 1736921840,
+        "narHash": "sha256-uA5+WMfkc5p+83/bXapGxL4d1SfTQ1rONLJPwuOruvk=",
         "owner": "astrickharren",
         "repo": "ignis-config",
-        "rev": "15af2c0098a12f68e40bcb26eb4d4727f1894ee3",
+        "rev": "dee5ccb2964800775bd86342ab434e1192383817",
         "type": "github"
       },
       "original": {
